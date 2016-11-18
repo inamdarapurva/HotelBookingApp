@@ -34,15 +34,15 @@
         <img class="media-object" src="<%- image_url %>">
       </div>
       <div class="media-heading">
-        <h4><%= short_desc%></h4>
+        <h4><%- short_desc%></h4>
       </div>
       <div class="media-body">
         <div class="large-6 columns">
-          <p><span> Rate: </span><span> $ <%= room_rate%> per night</span></p>
+          <p><span> Rate: </span><span> $ <%- room_rate%> per night</span></p>
         </div>
         <div class="large-6 columns">
           <label class="fontcolor"> Select No.of Rooms:
-            <select name="room" id="room0" style="width:100%; color:black; height:45px;">
+            <select name="room" id="no_of_rooms" style="width:100%; color:black; height:45px;">
               <option selected="selected" value="0">0</option>
               <option value="1">1</option>
               <option value="2">2</option>
@@ -54,7 +54,7 @@
           </label>
         </div>
         <div class="large-6 columns">
-          <button type="submit"  class="btn btn-outline btn-lg btn-block" style= "width:100%; height:45px; !important;">Book</button>
+          <button  id="btnBook" class="btn btn-outline btn-lg btn-block" style= "width:100%; height:45px; !important;">Book</button>
         </div>
       </div>
       <hr>
@@ -106,7 +106,9 @@
 
     <script src="app/js/app.js"></script>
     <script src="app/js/models/room.js"></script>
+    <script src="app/js/models/guest.js"></script>
     <script src="app/js/collections/rooms.js"></script>
+    <script src="app/js/collections/guests.js"></script>
     <script src="app/js/views/room.js"></script>
     <script src="app/js/views/rooms.js"></script>
     <script src="app/js/views/guest.js"></script>
@@ -141,8 +143,10 @@
             }
 
           ]
-        });
-      });
+       });
+       
+    });
+      
     </script>
   </body>
 </html>

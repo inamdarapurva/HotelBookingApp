@@ -1,6 +1,7 @@
 RoomReservation.Views.Rooms = Backbone.View.extend({
   template: _.template($('#tmpl-rooms').html()),
 
+
   renderOne: function(room) {
     var itemView = new RoomReservation.Views.Room({model: room});
     this.$('.rooms-container').append(itemView.render().$el);
