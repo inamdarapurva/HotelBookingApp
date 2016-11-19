@@ -25,7 +25,7 @@
 
 
     <script type="text/template" id="tmpl-rooms">
-      <h2 class="page-header text-center">List of Rooms</h2>
+      <h2 class="page-header text-center">SPECIAL OFFERS AND DEALS</h2>
       <ul class="media-list row rooms-container"></ul>
     </script>
 
@@ -38,23 +38,11 @@
       </div>
       <div class="media-body">
         <div class="large-6 columns">
-          <p><span> Rate: </span><span> $ <%- room_rate%> per night</span></p>
+          <p><span style="color:blue"> Price: </span><span> <%- price%></span></p>
         </div>
+        
         <div class="large-6 columns">
-          <label class="fontcolor"> Select No.of Rooms:
-            <select name="room" id="no_of_rooms" style="width:100%; color:black; height:45px;">
-              <option selected="selected" value="0">0</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-            </select>
-          </label>
-        </div>
-        <div class="large-6 columns">
-          <button  id="btnBook" class="btn btn-outline btn-lg btn-block" style= "width:100%; height:45px; !important;">Book</button>
+          <button  id="offerSelect" class="btn btn-outline btn-lg btn-block" style= "width:100%; height:45px; !important;">Select Offer</button>
         </div>
       </div>
       <hr>
@@ -107,42 +95,54 @@
     <script src="app/js/app.js"></script>
     <script src="app/js/models/room.js"></script>
     <script src="app/js/models/guest.js"></script>
+    <script src="app/js/models/offer.js"></script>
     <script src="app/js/collections/rooms.js"></script>
     <script src="app/js/collections/guests.js"></script>
+    <script src="app/js/collections/offers.js"></script>
     <script src="app/js/views/room.js"></script>
     <script src="app/js/views/rooms.js"></script>
+    <script src="app/js/views/offer.js"></script>
+    <script src="app/js/views/offers.js"></script>
     <script src="app/js/views/guest.js"></script>
     <script src="app/js/router.js"></script>
 
     <script>
       $(function() {
         RoomReservation.start({
-          rooms: [
-            {
-              id:1,
-              room_code:"Queen",
-              short_desc:"Queen Bed with Lanai Access",
-              image_url:"https://www.norone.com/nor1images/h-008/000153/small/00001717.jpg",
-              room_rate: 80
-            },
+       offers:   [
+  {
+      "image_url": "https://www.norone.com/nor1images/h-008/000153/small/00001717.jpg",
+      "short_desc": "Queen Bed with Lanai Access",
+      "long_desc": "Enjoy floor to ceiling windows with sliding glass door opening directly to a Sun Deck furnished with patio furniture and located on the 5th floor for your comfort and convenience during your stay.",
+      "item_id": 100,
+      "room_code": "QUEEN",
+      "price": "$20 extra per night"
+  },
+  {
+      "image_url": "https://www.norone.com/nor1images/h-008/000153/small/00001701.jpg",
+      "short_desc": "King Bed with Lanai Access",
+      "long_desc": "King Bed with Lanai Access. Enjoy floor to ceiling windows with sliding glass door opening directly to a Sun Deck furnished with patio furniture for relaxing on the 5th floor during your stay.",
+      "item_id": 101,
+      "room_code": "KING",
+      "price": "$25 extra per night"
+  },
+  {
+      "image_url": "https://www.norone.com/nor1images/h-008/000153/small/00001728.jpg",
+      "short_desc": "Premier Suite with Lanai Access",
+      "long_desc": "Enjoy this large open floor plan with dining area, living area including pullout sleeper sofa with attached King bedroom, wet bar, and refrigerator, featuring floor to ceiling windows with sliding glass door opening directly to a Sun Deck, ideal for meeting planners, executives or families looking for extra space.",
+      "item_id": 102,
+      "room_code": "SUITE",
+      "price": "$30 extra per night"
+  },
+  {
+      "image_url": "https://www.norone.com/nor1images/h-026/000892/small/00011999.jpg",
+      "short_desc": "Champagne and Strawberries",
+      "long_desc": "Upon arrival, enjoy a combination of fresh strawberries and a bottle of chilled champagne from the comfort of your own guestroom.",
+      "item_id": 103,
+      "price": "$50 extra per night"
+  }
+]
 
-            {
-              id:2,
-              room_code:"King",
-              short_desc:"King Bed with Lanai Access",
-              image_url:"https://www.norone.com/nor1images/h-008/000153/small/00001701.jpg",
-              room_rate: 120
-            },
-
-            {
-              id:3,
-              room_code:"Suite",
-              short_desc:"Premier Suite with Lanai Access",
-              image_url:"https://www.norone.com/nor1images/h-008/000153/small/00001728.jpg",
-              room_rate: 150
-            }
-
-          ]
        });
        
     });
