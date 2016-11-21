@@ -3,6 +3,6 @@ RoomReservation.Router = Backbone.Router.extend({
     '': 'home',
     'rooms': 'showRooms',
     'rooms/?:params':'parseURL',
-    'guests': 'getGuestDetails'
+    'confirm': 'displayConfirmation'
   }
 });

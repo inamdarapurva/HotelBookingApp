@@ -2,14 +2,10 @@ window.RoomReservation = {
   Models: {},
   Collections: {},
   Views: {},
+  Session:{},
 
   start: function(data) {
-    //var rooms = new RoomReservation.Collections.Rooms(data.rooms),
-       var router = new RoomReservation.Router();
-
-    var guests = new RoomReservation.Collections.Guests();
-
-    
+    var router = new RoomReservation.Router();
 
     router.on('route:home', function() {
       router.navigate('rooms', {
@@ -36,12 +32,29 @@ window.RoomReservation = {
         }
       };
 
+      //parsing URL
       var first_name = getUrlParameter('first_name');
       var last_name = getUrlParameter('last_name');
       var email = getUrlParameter('email');
       var room_code = getUrlParameter('room_code');
       var room_price = getUrlParameter('room_price');
+
+      //displaying guest information with booked room details
+      var guest_info = new RoomReservation.Models.GuestDetail({
+        first_name: first_name,
+        last_name: last_name,
+        email: email,
+        room_code: room_code,
+        room_price: room_price
+      });
       
+      var guestDetails = new RoomReservation.Views.GuestDetail({
+        model:guest_info
+      });
+      $('.welcome-container').html(guestDetails.render().$el);
+      
+      
+      //displaying ofers for booked room
       if(room_code == 'QUEEN' && room_price < 199) {
         //console.log("Upgrade to King-102");
         //console.log("Upgrade to Suite-103");
@@ -88,7 +101,8 @@ window.RoomReservation = {
          $('.main-container').html(offersView.render().$el);
       }
       else if(room_code=='SUITE' && room_price < 199) {
-         document.write("No Offers to display....");
+         var noOffersView= new RoomReservation.Views.NoOffers();
+         $('.main-container').html(noOffersView.render().$el);
       }
       else if(room_code=='SUITE' && room_price >= 199) {
         var offers = new RoomReservation.Collections.Offers([data.offers[3]]);
@@ -98,53 +112,46 @@ window.RoomReservation = {
         
          $('.main-container').html(offersView.render().$el);
       }
+
       
+      //displaying selected offers
+      var selectedOffers= new RoomReservation.Collections.SelectedOffers();
 
-
-
-    });
-
-    router.on('route:showRooms', function() {
-
-     // var roomsView = new RoomReservation.Views.Rooms({
-     //    collection: rooms
-     //  });
-           
-      $(document).on('book:clicked', function(event,attrs) {
-        
-         attrs.id = _.max(guests.pluck('id'));
-        //guests.add(attrs);
-        guests.set(attrs);
-        
-        guests.each(function(guest) {
-          console.log("ID:: "+ guest.get('id')); 
-          console.log("name:: "+ guest.get('first_name'));
-          console.log("room:: "+ guest.get('room_code'));
-        });
-      
+      $(document).on('add:offer', function(event,model){
+        //model.id = selectedOffers.isEmpty() ? 1 : (_.max(selectedOffers.pluck('id')) + 1);
+        selectedOffers.add(model);
+        RoomReservation.Session  = selectedOffers.toJSON();
+        console.log(selectedOffers.toJSON());
       });
 
-      //$('.main-container').html(roomsView.render().$el);
+      $(document).on('remove:offer', function(event,model){
+        //console.log('item id:: '+ model.get('item_id'));
+        //selectedOffers.remove(model);
+        var item_id = model.get('item_id');
+        selectedOffers.remove(selectedOffers.where({item_id: item_id}));
+        RoomReservation.Session = selectedOffers.toJSON();
+        console.log(selectedOffers.toJSON());
+      });  
+
+      $(document).on('click:confirm',function(event){
+         router.navigate('confirm',{trigger:true});
+      });   
+    
     });
 
     
-    router.on('route:getGuestDetails', function() {
-      var guestDetails = new RoomReservation.Views.Guest({
-        model: new  RoomReservation.Models.Guest()
+    router.on('route:displayConfirmation',function(){
+      var selectedoffers = new RoomReservation.Collections.SelectedOffers(RoomReservation.Session);
+      var offersView = new RoomReservation.Views.SelectedOffers({
+          collection: selectedoffers
       });
+        
+      $('.main-container').html(offersView.render().$el);
       
-      $(document).on('form:submitted', function(event,attrs) {
-
-        var guest_id = guests.pluck('id');
-        attrs.id = guests.isEmpty() ? 1 : (_.max(guest_id) + 1);
-        guests.set(attrs);
-        router.navigate('rooms',true);
-      });
-
-      $('.main-container').html(guestDetails.render().$el);
-
     });
 
+    
+        
     Backbone.history.start();
   }
 };

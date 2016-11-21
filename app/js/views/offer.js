@@ -6,6 +6,7 @@ RoomReservation.Views.Offer = Backbone.View.extend({
   events:{
 
     'click #offerSelect':'onClickSelect'
+    
   },
 
   render: function() {
@@ -19,7 +20,27 @@ RoomReservation.Views.Offer = Backbone.View.extend({
 
   onClickSelect: function(e) {
     e.preventDefault();
-    this.$el.css('border','1px solid black');
+    this.$el.toggleClass('li-border');
+    
+    
+    var model = new RoomReservation.Models.Offer({
+        "image_url": this.model.get('image_url'),
+        "short_desc": this.model.get('short_desc') ,
+        "long_desc": this.model.get('long_desc'),
+        "item_id": this.model.get('item_id'),
+        "room_code": this.model.get('room_code'),
+        "price": this.model.get('price')
+      });
+
+    if(this.$el.hasClass('li-border')){
+      console.log('send details...');
+      $(document).trigger('add:offer',model);
+    }
+    
+    else {
+      console.log('remove details...');
+      $(document).trigger('remove:offer',model);
+    }
 
   }
 

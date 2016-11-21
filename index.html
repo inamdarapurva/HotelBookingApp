@@ -17,6 +17,10 @@
     </header>
     <div class="container">
       <div class="row">
+        <div class="col-xs-12 welcome-container">
+        </div>
+      </div>
+      <div class="row">
         <div class="col-xs-12 main-container">
         </div>
       </div>
@@ -27,6 +31,9 @@
     <script type="text/template" id="tmpl-rooms">
       <h2 class="page-header text-center">SPECIAL OFFERS AND DEALS</h2>
       <ul class="media-list row rooms-container"></ul>
+      <div class="large-6 columns">
+          <button  id="confirm" class="btn btn-outline btn-lg btn-block" style= "float:right; width:30%; height:45px; !important;">Confirm</button>
+      </div>
     </script>
 
     <script type="text/template" id="tmpl-room">
@@ -38,7 +45,7 @@
       </div>
       <div class="media-body">
         <div class="large-6 columns">
-          <p><span style="color:blue"> Price: </span><span> <%- price%></span></p>
+          <p><span style="color:#6f5499"> Price: </span><span> <%- price%></span></p>
         </div>
         
         <div class="large-6 columns">
@@ -50,60 +57,86 @@
 
 
     <script type="text/template" id="tmpl-guest-details">
-      <h2 class="page-header text-center">Contact Information</h2>
+      <h2 class="page-header text-center">BOOKING DETAILS</h2>
       <form role="form" class="form-horizontal contract-form">
         <div class="form-group">
           <label class="col-sm-4 control-label">First Name:</label>
           <div class="col-sm-6">
-            <input type="text" class="form-control contact-fname-input" value="">
+            <%- first_name%>
           </div>
         </div>
         <div class="form-group">
           <label class="col-sm-4 control-label">Last name:</label>
           <div class="col-sm-6">
-            <input type="text" class="form-control contact-lname-input" value="">
+            <%- last_name%>
           </div>
         </div>
         <div class="form-group">
           <label class="col-sm-4 control-label">Email address:</label>
           <div class="col-sm-6">
-            <input type="email" class="form-control contact-email-input" value="">
+            <%- email%>
           </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-4 control-label">Telephone number:</label>
+          <label class="col-sm-4 control-label">Room Name:</label>
           <div class="col-sm-6">
-            <input type="tel" class="form-control contact-tel-input" value="">
+            <%- room_code%>
           </div>
         </div>
         <div class="form-group">
-          <div class="col-sm-offset-4 col-sm-3">
-            <button type="submit" class="btn btn-outline btn-lg btn-block">Submit</button>
-          </div>
-          <div class="col-sm-3">
-            <a href="#" class="btn btn-outline btn-lg btn-block">Cancel</a>
+          <label class="col-sm-4 control-label">Room Price:</label>
+          <div class="col-sm-6">
+            <%- room_price%>
           </div>
         </div>
       </form>
     </script>
 
+
+    <script type="text/template" id="tmpl-selectedOffers">
+      <h2 class="page-header text-center">SELECTED OFFERS</h2>
+      <ul class="media-list row rooms-container"></ul>
+    </script>
+
+    <script type="text/template" id="tmpl-selectedOffer">
+      <div class="thumbnail">
+        <img class="media-object" src="<%- image_url %>">
+      </div>
+      <div class="media-heading">
+        <h4><%- short_desc%></h4>
+      </div>
+      <div class="media-body">
+        <div class="large-6 columns">
+          <p><span style="color:#6f5499"> Price: </span><span> <%- price%></span></p>
+        </div>
+      </div>
+      <hr>
+    </script>
+
+    <script type="text/template" id="tmpl-noOffers">
+      <h2 class="page-header text-center">SPECIAL OFFERS and DEALS</h2>
+      <ul class="media-list row rooms-container">
+      <h4 style="color:#6f5499">No offers at this time!! Enjoy!</h4>
+      </ul>
+    </script>
+
+    
     
     <script src="vendor/jquery/jquery.js"></script>
     <script src="vendor/underscore/underscore.js"></script>
     <script src="vendor/backbone/backbone.js"></script>
 
     <script src="app/js/app.js"></script>
-    <script src="app/js/models/room.js"></script>
-    <script src="app/js/models/guest.js"></script>
     <script src="app/js/models/offer.js"></script>
-    <script src="app/js/collections/rooms.js"></script>
-    <script src="app/js/collections/guests.js"></script>
+    <script src="app/js/models/guestDetail.js"></script>
     <script src="app/js/collections/offers.js"></script>
-    <script src="app/js/views/room.js"></script>
-    <script src="app/js/views/rooms.js"></script>
+    <script src="app/js/collections/selectedOffers.js"></script>
     <script src="app/js/views/offer.js"></script>
     <script src="app/js/views/offers.js"></script>
-    <script src="app/js/views/guest.js"></script>
+    <script src="app/js/views/selectedOffer.js"></script>
+    <script src="app/js/views/selectedOffers.js"></script>
+    <script src="app/js/views/noOffers.js"></script>
+    <script src="app/js/views/guestDetail.js"></script>
     <script src="app/js/router.js"></script>
 
     <script>
