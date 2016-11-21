@@ -1,3 +1,5 @@
+/*selectedOffers.js - responsible for displaying set of selected offers on confirmation page
+**/
 RoomReservation.Views.SelectedOffers = Backbone.View.extend({
   template: _.template($('#tmpl-selectedOffers').html()),
 

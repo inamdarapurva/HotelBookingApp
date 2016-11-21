@@ -1,3 +1,6 @@
+/*selectedOffer.js -  similar to offer.js view performs the task to display single selected offer model
+**/
+
 RoomReservation.Views.SelectedOffer = Backbone.View.extend({
   tagName: 'li',
   className: 'media col-md-6 col-lg-4',
@@ -6,9 +9,6 @@ RoomReservation.Views.SelectedOffer = Backbone.View.extend({
   
 
   render: function() {
-    //  var html = this.template(_.extend(this.model.toJSON(), {
-    //   isNew: this.model.isNew()
-    // }));
     var html = this.template(this.model.toJSON());
     this.$el.append(html);
     return this;
