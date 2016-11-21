@@ -11,7 +11,7 @@
   <body>
     <header class="bs-header">
       <div class="container">
-        <h1>Hotel Luxury</h1>
+        <h1>HOTEL LUXURY </h1>
       </div>
     </header>
     
@@ -64,7 +64,27 @@
           <p><span style="color:#7D1935"> Email: </span><span style="font-style:italic;"> <%- email%></span></p>
         </div>
         <div class="text-center">
-          <p><span style="color:#7D1935"> Booked Room: </span><span style="font-style:italic;"> <%- room_code%></span></p>
+          <% if (room_code == 'QUEEN') { %>
+            <p>
+              <span style="color:#7D1935"> Booked Room: </span>
+              <span style="font-style:italic;"> Queen Bed with Lanai Access </span>
+            </p>
+          <% } else if (room_code == 'KING') { %>
+            <p>
+              <span style="color:#7D1935"> Booked Room: </span>
+              <span style="font-style:italic;">King Bed with Lanai Access </span>
+            </p>
+          <% } else if (room_code == 'SUITE') { %>
+            <p>
+              <span style="color:#7D1935"> Booked Room: </span>
+              <span style="font-style:italic;">Premier Suite with Lanai Access </span>
+            </p>
+          <% } else { %>
+            <p>
+              <span style="color:#7D1935"> Booked Room: </span>
+              <span style="font-style:italic;">No room type exists </span>
+            </p>
+          <% } %>
         </div>
         <div class="text-center">
           <p><span style="color:#7D1935"> Price: </span><span style="font-style:italic;"> $ <%- room_price%></span></p>
